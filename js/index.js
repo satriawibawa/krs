@@ -5,6 +5,16 @@ $( document ).ready(function() {
             var roletype = $(this).val();
             optionswitch(roletype);
         });
+        $('#jam').focus(function() { 
+            $('#jam').mdtimepicker({
+                timeFormat: 'hh:mm:ss.000', 
+                format: 'h:mm tt',
+                theme: 'blue',
+                readOnly: true,
+                hourPadding: false,
+                clearBtn: false
+          });
+        });
     });
     function optionswitch(myfilter) {
         console.log(myfilter);
@@ -88,6 +98,62 @@ $( document ).ready(function() {
             });
         }else{
             alert('Ada data yang kosong')
+        }
+     
+    });
+    $(".matkul").click(function(e){
+     
+        e.preventDefault();
+        var kdmatkul = jQuery('input[name="kdmatkul"]').val(), 
+            nmmatkul = jQuery('input[name="nmmatkul"]').val(),
+            sks = jQuery('input[name="sks"]').val(),
+            ruangan = jQuery('input[name="ruangan"]').val(),
+            kelas = jQuery('input[name="kelas"]').val(),
+            hari = jQuery('select[name="hari"]').val(),
+            jam = jQuery('input[name="jam"]').val();
+        if(kdmatkul != '' && nmmatkul != '' && sks != '' && ruangan != '' && kelas != '' && hari != '' && jam != ''){
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                url: 'php/create.php',
+                data:{kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam},
+                error: function(e) {
+                    var object = JSON.parse(e.responseText);
+                    alert(object.message);
+                  },
+            }).done(function(data){
+                alert('Data berhasil ditambah')
+                window.location.replace('read.php');
+            });
+        }else{
+            alert('Ada data yang kosong')
+        }
+     
+    });
+    $(".dosen").click(function(e){
+     
+        e.preventDefault();
+        var nama = jQuery('input[name="nama"]').val(), 
+            email = jQuery('input[name="email"]').val(),
+            alamat = $('textarea#alamat').val(),
+            username = jQuery('input[name="username"]').val(),
+            password = jQuery('input[name="password"]').val();
+        if(nama != '' && email != '' && alamat != '' && username != '' && password != ''){
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                url: 'php/create.php',
+                data:{nama:nama,email:email,alamat:alamat,username:username,password:password},
+                error: function(e) {
+                    var object = JSON.parse(e.responseText);
+                    alert(object.message);
+                  },
+            }).done(function(data){
+                alert('Data berhasil ditambah')
+                window.location.replace('read.php');
+            });
+        }else{
+            alert('Ada data yang kosong');
         }
      
     });

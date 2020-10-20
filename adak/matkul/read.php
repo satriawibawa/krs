@@ -7,6 +7,7 @@
     <title>Daftar Mata Kuliah</title>
 </head>
 <body>
+  
 <div class="container mt-3">
   <div class="col-md-12">
     <div class="card">
@@ -32,22 +33,34 @@
                 <th>Action</th>
               </tr>
             </thead>
+            <?php
+              include("../../config/koneksi.php");
+              $query = "SELECT * FROM `matkul`";
+              $result = $koneksi->query($query);
+              while($data = mysqli_fetch_row($result))
+              {
+            ?>
             <tbody>
               <tr>
-                <td>1</td>
-                <td>ABCD1234</td>
-                <td>Pemerograman Web</td>
-                <td>3 SKS</td>
-                <td>S32</td>
-                <td>TI3</td>
-                <td>Senin</td>
-                <td>10:00</td>
-                <td>
-                  <a href="update.php" class="btn btn-success">Edit</a> |
-                  <a href="" class="btn btn-danger">Delete</a>
+              <?php
+                echo "<td align=center>$data[0]</td>";
+                echo "<td align=center>$data[1]</td>";
+                echo "<td align=center>$data[2]</td>";
+                echo "<td align=center>$data[3]</td>";
+                echo "<td align=center>$data[4]</td>";
+                echo "<td align=center>$data[5]</td>";
+                echo "<td align=center>$data[6]</td>";
+                echo "<td align=center>$data[7]</td>";
+                echo '<td align=center><a href="update.php?id='.$data[0].'" class="btn btn-success">Edit</a> |
+                  <a href="delete.php?id='.$data[0].'" class="btn btn-danger">Delete</a></td>
+                  '
+                  ?>
                 </td>
               </tr>
             </tbody>
+            <?php
+            }
+            ?>
           </table>
         </div>
         <div class="row justify-content-left align-items-left">
@@ -74,8 +87,12 @@
       </div>
     </div>
   </div>
-  
 </div>
 <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.3.1/jquery.twbsPagination.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>

@@ -28,18 +28,32 @@
                 <th>Action</th>
               </tr>
             </thead>
+            <?php
+              include("../../config/koneksi.php");
+              $no=0;
+              $query = "SELECT * FROM `dosen`";
+              $result = $koneksi->query($query);
+              while($data = mysqli_fetch_row($result))
+              {
+              $no++;
+            ?>
             <tbody>
               <tr>
-                <td>1</td>
-                <td>Satrio Wibowo</td>
-                <td>Palembang</td>
-                <td>satria@gmail.com</td>
-                <td>
-                  <a href="update.php" class="btn btn-success">Edit</a> |
-                  <a href="" class="btn btn-danger">Delete</a>
+              <?php
+                echo "<td align=center>$no</td>";
+                echo "<td align=center>$data[1]</td>";
+                echo "<td align=center>$data[2]</td>";
+                echo "<td align=center>$data[3]</td>";
+                echo '<td align=center><a href="update.php?id='.$data[0].'" class="btn btn-success">Edit</a> |
+                <a href="delete.php?id='.$data[0].'" class="btn btn-danger">Delete</a></td>
+                '
+                ?>
                 </td>
               </tr>
             </tbody>
+            <?php
+            }
+            ?>
           </table>
         </div>
         <div class="row justify-content-left align-items-left">
