@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="../../js/mdtimepicker.css" rel="stylesheet">
+    <link href="../js/mdtimepicker.css" rel="stylesheet">
     <title>Daftar Mahasiswa</title>
 </head>
 <body>
@@ -52,6 +52,22 @@
                 <option value="jumat">Jum'at</option>
               </select>
             </div>
+            <div class="col-md-6">
+              <label for="dosen">Dosen</label>
+              <?php
+                  include("../config/koneksi.php");
+                  $query = "SELECT * FROM `dosen`";
+                  $result = $koneksi->query($query);
+                  
+                  echo '<select class="form-control" name="idDosen" id="idDosen">';
+                  while($dosen = mysqli_fetch_row($result))
+                  {
+
+                    echo '<option value=' . $dosen[0] . '>' . $dosen[1] . '</option>';
+                }
+                  echo '</select>';
+              ?>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-6">
@@ -79,7 +95,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>
-<script src="../../js/mdtimepicker.js"></script>
-<script type="text/javascript" src="../../js/index.js"></script>
+<script src="../js/mdtimepicker.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
 </body>
 </html>

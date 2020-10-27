@@ -29,9 +29,19 @@
                 <th>Action</th>
               </tr>
             </thead>
+            <?php
+              session_start();
+              include("../config/koneksi.php");
+              $no=0;
+              $queryJoin = "SELECT kd_matkul,nama_matkul,sks,kelas,ruangan,hari,jam,nama FROM matkul INNER JOIN dosen ON matkul.id_dosen=dosen.id_dosen WHERE username = '" . $_SESSION['username'] . "'";
+              $result1 = $koneksi->query($queryJoin);
+              while($data1 = mysqli_fetch_row($result1))
+              {
+                $no++;
+            ?>
             <tbody>
               <tr>
-                <td>1</td>
+                <!-- <td>1</td>
                 <td>Pemerograman Web</td>
                 <td>2 SKS</td>
                 <td>Femi Dwi Astuti</td>
@@ -41,9 +51,25 @@
                 <td>10:15</td>
                 <td>
                   <a href="" class="btn btn-success">Cetak</a>
-                </td>
+                </td> -->
+                <?php
+                echo "<td align=center>$no</td>";
+                echo "<td align=center>$data1[0]</td>";
+                echo "<td align=center>$data1[2]</td>";
+                echo "<td align=center>$data1[7]</td>";
+                echo "<td align=center>$data1[3]</td>";
+                echo "<td align=center>$data1[4]</td>";
+                echo "<td align=center>$data1[5]</td>";
+                echo "<td align=center>$data1[6]</td>";
+                echo '<td align=center><a href="" class="btn btn-success">Cetak</a></td>
+                '
+                ?>
               </tr>
             </tbody>
+            <?php
+              }
+              // }
+            ?>
           </table>
         </div>
       </div>

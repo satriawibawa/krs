@@ -4,11 +4,11 @@
 // error_reporting(E_ALL);
 // ini_set("error_reporting", E_ALL);
 // error_reporting(E_ALL & ~E_NOTICE);
-require '../../../config/koneksi.php';
+require '../../config/koneksi.php';
 
-if (isset($_POST['kdmatkul']) && isset($_POST['nmmatkul']) && isset($_POST['sks']) && isset($_POST['ruangan']) && isset($_POST['kelas']) && isset($_POST['hari'])  && isset($_POST['jam'])) {
+if (isset($_POST['kdmatkul']) && isset($_POST['nmmatkul']) && isset($_POST['sks']) && isset($_POST['ruangan']) && isset($_POST['kelas']) && isset($_POST['hari'])  && isset($_POST['jam']) && isset($_POST['idDosen'])) {
     
-    $query = "INSERT INTO matkul (kd_matkul,nama_matkul,sks,ruangan,kelas,hari,jam) VALUES ("."'" . $_POST['kdmatkul'] . "','" . $_POST['nmmatkul'] . "','" . $_POST['sks'] . "','" . $_POST['ruangan'] . "','" . $_POST['kelas'] . "','" . $_POST['hari'] . "','" . $_POST['jam'] . "')";
+    $query = "INSERT INTO matkul (kd_matkul,nama_matkul,sks,ruangan,kelas,hari,jam,id_dosen) VALUES ("."'" . $_POST['kdmatkul'] . "','" . $_POST['nmmatkul'] . "','" . $_POST['sks'] . "','" . $_POST['ruangan'] . "','" . $_POST['kelas'] . "','" . $_POST['hari'] . "','" . $_POST['jam'] . "','".$_POST['idDosen']."')";
     $result = $koneksi->query($query);
     
     if ($result != false) {

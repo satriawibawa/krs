@@ -49,7 +49,7 @@ $( document ).ready(function() {
             }else if(role == 'dosen'){
                 window.location.replace('dosen/read.php');
             }else if(role == 'adak'){
-                window.location.replace('adak');
+                window.location.replace('adak/index.php');
             }
         }
         if(username != '' && password != '' && role != ''){
@@ -110,20 +110,21 @@ $( document ).ready(function() {
             ruangan = jQuery('input[name="ruangan"]').val(),
             kelas = jQuery('input[name="kelas"]').val(),
             hari = jQuery('select[name="hari"]').val(),
-            jam = jQuery('input[name="jam"]').val();
-        if(kdmatkul != '' && nmmatkul != '' && sks != '' && ruangan != '' && kelas != '' && hari != '' && jam != ''){
+            jam = jQuery('input[name="jam"]').val(),
+            idDosen = jQuery('select[name="idDosen"]').val();
+        if(kdmatkul != '' && nmmatkul != '' && sks != '' && ruangan != '' && kelas != '' && hari != '' && jam != '' && idDosen != ''){
             $.ajax({
                 dataType: 'json',
                 type:'POST',
                 url: 'php/create.php',
-                data:{kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam},
+                data:{kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam,idDosen:idDosen},
                 error: function(e) {
                     var object = JSON.parse(e.responseText);
                     alert(object.message);
                   },
             }).done(function(data){
                 alert('Data berhasil ditambah')
-                window.location.replace('read.php');
+                window.location.replace('index.php');
             });
         }else{
             alert('Ada data yang kosong')

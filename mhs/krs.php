@@ -30,16 +30,17 @@
                     <tr>
                       <th>No</th>
                       <th>Kd Matakuliah</th>
+                      <th>Nama Matakuliah</th>
                       <th>Sks</th>
                       <th>Nama Dosen</th>
                       <th>Kelas</th>
                       <th>Ruangan</th>
                       <th>Hari</th>
                       <th>Jam</th>
-                      <th>Action</th>
+                      <!-- <th>Action</th> -->
                     </tr>
                   </thead>
-                  <tbody>
+                  <!-- <tbody>
                     <tr>
                       <td>1</td>
                       <td>Pemerograman Web</td>
@@ -79,8 +80,37 @@
                         <input type="checkbox" name="" id="">
                       </td>
                     </tr>
-                  </tbody>
-                </table>
+                  </tbody> -->
+                  <?php
+              include("../config/koneksi.php");
+              $no=0;
+              $queryJoin = "SELECT matkul.kd_matkul,matkul.nama_matkul,matkul.sks,matkul.kelas,matkul.ruangan,matkul.hari,matkul.jam,dosen.nama,matkul.id_matkul FROM dosen INNER JOIN matkul ON dosen.id_dosen=matkul.id_dosen";
+              $result = $koneksi->query($queryJoin);
+              while($data = mysqli_fetch_row($result))
+              {
+              $no++;
+            ?>
+            <tbody>
+              <tr>
+              <?php
+                echo '<td><input type="checkbox" name="" id=""> '.$no.'</td>';
+                echo "<td align=center>$data[0]</td>";
+                echo "<td align=center>$data[1]</td>";
+                echo "<td align=center>$data[2]</td>";
+                echo "<td align=center>$data[7]</td>";
+                echo "<td align=center>$data[3]</td>";
+                echo "<td align=center>$data[4]</td>";
+                echo "<td align=center>$data[5]</td>";
+                echo "<td align=center>$data[6]</td>";
+              ?>
+                </td>
+              </tr>
+            </tbody>
+            <?php
+            
+          }
+          ?>
+                <!-- </table>
               </div>
             </div>
           </div>
@@ -149,7 +179,7 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                </table> -->
               </div>
             </div>
           </div>

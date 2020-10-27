@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <title>Daftar Mata Kuliah</title>
 </head>
 <body>
@@ -17,6 +17,7 @@
       <div class="card-body">
         <div class="row justify-content-left align-items-left">
           <a href="create.php" class="btn btn-primary">+ Tambah Data Mata Kuliah</a>
+          <a href="dosen/create.php" class="btn btn-primary">+ Tambah Data Dosen</a>
         </div><br>
         <div class="row justify-content-center align-items-center">
           <table class="table table-bordered">
@@ -30,19 +31,23 @@
                 <th>Kelas</th>
                 <th>Hari</th>
                 <th>Jam</th>
+                <th>Dosen</th>
                 <th>Action</th>
               </tr>
             </thead>
             <?php
-              include("../../config/koneksi.php");
-              $query = "SELECT * FROM `matkul`";
-              $result = $koneksi->query($query);
+              include("../config/koneksi.php");
+              $no=0;
+              $queryJoin = "SELECT matkul.kd_matkul,matkul.nama_matkul,matkul.sks,matkul.ruangan,matkul.kelas,matkul.hari,matkul.jam,dosen.nama,matkul.id_matkul FROM dosen INNER JOIN matkul ON dosen.id_dosen=matkul.id_dosen";
+              $result = $koneksi->query($queryJoin);
               while($data = mysqli_fetch_row($result))
               {
+              $no++;
             ?>
             <tbody>
               <tr>
               <?php
+                echo "<td align=center>$no</td>";
                 echo "<td align=center>$data[0]</td>";
                 echo "<td align=center>$data[1]</td>";
                 echo "<td align=center>$data[2]</td>";
@@ -51,15 +56,17 @@
                 echo "<td align=center>$data[5]</td>";
                 echo "<td align=center>$data[6]</td>";
                 echo "<td align=center>$data[7]</td>";
-                echo '<td align=center><a href="update.php?id='.$data[0].'" class="btn btn-success">Edit</a> |
-                  <a href="delete.php?id='.$data[0].'" class="btn btn-danger">Delete</a></td>
+                echo '<td align=center><a href="update.php?id='.$data[8].'" class="btn btn-success">Edit</a> |
+                  <a href="delete.php?id='.$data[8].'" class="btn btn-danger">Delete</a></td>
                   '
                   ?>
                 </td>
               </tr>
             </tbody>
             <?php
-            }
+            
+          }
+            // }
             ?>
           </table>
         </div>
