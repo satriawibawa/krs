@@ -15,6 +15,7 @@
       </div>
       <div class="card-body">
         <div class="row justify-content-left align-items-left">
+          <a href="../index.php" class="btn btn-primary">+ Home</a>
           <a href="create.php" class="btn btn-primary">+ Tambah Data Dosen</a>
         </div><br>
         <div class="row justify-content-center align-items-center">

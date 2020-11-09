@@ -18,6 +18,7 @@
         <div class="row justify-content-left align-items-left">
           <a href="create.php" class="btn btn-primary">+ Tambah Data Mata Kuliah</a>
           <a href="dosen/create.php" class="btn btn-primary">+ Tambah Data Dosen</a>
+          <a href="dosen/read.php" class="btn btn-primary">+ Lihat Dosen</a>
         </div><br>
         <div class="row justify-content-center align-items-center">
           <table class="table table-bordered">
@@ -31,6 +32,7 @@
                 <th>Kelas</th>
                 <th>Hari</th>
                 <th>Jam</th>
+                <th>Semester</th>
                 <th>Dosen</th>
                 <th>Action</th>
               </tr>
@@ -38,7 +40,7 @@
             <?php
               include("../config/koneksi.php");
               $no=0;
-              $queryJoin = "SELECT matkul.kd_matkul,matkul.nama_matkul,matkul.sks,matkul.ruangan,matkul.kelas,matkul.hari,matkul.jam,dosen.nama,matkul.id_matkul FROM dosen INNER JOIN matkul ON dosen.id_dosen=matkul.id_dosen";
+              $queryJoin = "SELECT matkul.kd_matkul,matkul.nama_matkul,matkul.sks,matkul.ruangan,matkul.kelas,matkul.hari,matkul.jam,matkul.semester,dosen.nama,matkul.id_matkul FROM dosen INNER JOIN matkul ON dosen.id_dosen=matkul.id_dosen ORDER BY semester ASC";
               $result = $koneksi->query($queryJoin);
               while($data = mysqli_fetch_row($result))
               {
@@ -56,7 +58,8 @@
                 echo "<td align=center>$data[5]</td>";
                 echo "<td align=center>$data[6]</td>";
                 echo "<td align=center>$data[7]</td>";
-                echo '<td align=center><a href="update.php?id='.$data[8].'" class="btn btn-success">Edit</a> |
+                echo "<td align=center>$data[8]</td>";
+                echo '<td align=center><a href="update.php?id='.$data[9].'" class="btn btn-success">Edit</a> |
                   <a href="delete.php?id='.$data[8].'" class="btn btn-danger">Delete</a></td>
                   '
                   ?>

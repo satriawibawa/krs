@@ -27,11 +27,11 @@
           <div class="row">
             <div class="col-md-6">
               <label for="kd_mk">Kd Mata Kuliah</label>
-              <input type="text" class="form-control" name="kd_matkul" id="kd_matkul" value='<?php echo $data[1]?>'>
+              <input type="text" class="form-control" name="kdmatkul" id="kdmatkul" value='<?php echo $data[1]?>'>
             </div>
             <div class="col-md-6">
               <label for="nama_mk">Nama Mata Kuliah</label>
-              <input type="text" class="form-control" name="nama_matkul" id="nama_matkul" value='<?php echo $data[2]?>'>
+              <input type="text" class="form-control" name="nmmatkul" id="nmmatkul" value='<?php echo $data[2]?>'>
             </div>
           </div>
           <div class="row">
@@ -60,16 +60,29 @@
               </select>
             </div>
             <div class="col-md-6">
+              <label for="semester">Semester</label>
+              <select class="form-control" name="semester" id="semester">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+            <div class="col-md-6">
               <label for="dosen">Dosen</label>
               <?php
                   $query = "SELECT * FROM `dosen`";
                   $result = $koneksi->query($query);
                   
-                  echo '<select class="form-control" name="dosen" id="dosen">';
+                  echo '<select class="form-control" name="idDosen" id="idDosen">';
                   while($dosen = mysqli_fetch_row($result))
                   {
 
-                    echo '<option values=' . $dosen[0] . '>' . $dosen[1] . '</option>';
+                    echo '<option value=' . $dosen[0] . '>' . $dosen[1] . '</option>';
                 }
                   echo '</select>';
               ?>
@@ -86,7 +99,7 @@
           ?>
           <div class="row mt-2">
             <div class="col-md-6">
-              <input type="submit" class="btn btn-primary" name="" value="Simpan">
+              <input type="submit" class="btn btn-primary ubah" value="Simpan">
             </div>
           </div>
         <!-- </form> -->
@@ -95,7 +108,7 @@
   </div>
   
 </div>
-<script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>

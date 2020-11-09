@@ -38,6 +38,24 @@ $( document ).ready(function() {
             $('.classjurusan').after(container1);
         }
     }
+    function parse_query_string(query) {
+        var vars = query.split("&");
+        var query_string = {};
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          var key = decodeURIComponent(pair[0]);
+          var value = decodeURIComponent(pair[1]);
+          if (typeof query_string[key] === "undefined") {
+            query_string[key] = decodeURIComponent(value);
+          } else if (typeof query_string[key] === "string") {
+            var arr = [query_string[key], decodeURIComponent(value)];
+            query_string[key] = arr;
+          } else {
+            query_string[key].push(decodeURIComponent(value));
+          }
+        }
+        return query_string;
+      }
     $(".login").click(function(e){
         e.preventDefault();
         var username = jQuery('input[name="username"]').val();
@@ -111,13 +129,14 @@ $( document ).ready(function() {
             kelas = jQuery('input[name="kelas"]').val(),
             hari = jQuery('select[name="hari"]').val(),
             jam = jQuery('input[name="jam"]').val(),
+            semester = jQuery('select[name="semester"]').val(),
             idDosen = jQuery('select[name="idDosen"]').val();
-        if(kdmatkul != '' && nmmatkul != '' && sks != '' && ruangan != '' && kelas != '' && hari != '' && jam != '' && idDosen != ''){
+        if(kdmatkul != '' && nmmatkul != '' && sks != '' && ruangan != '' && kelas != '' && hari != '' && semester != '' && idDosen != '' && idDosen != ''){
             $.ajax({
                 dataType: 'json',
                 type:'POST',
                 url: 'php/create.php',
-                data:{kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam,idDosen:idDosen},
+                data:{kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam,semester:semester,idDosen:idDosen},
                 error: function(e) {
                     var object = JSON.parse(e.responseText);
                     alert(object.message);
@@ -155,6 +174,40 @@ $( document ).ready(function() {
             });
         }else{
             alert('Ada data yang kosong');
+        }
+     
+    });
+    $(".ubah").click(function(e){
+        
+        e.preventDefault();
+        var query = window.location.search.substring(1);
+        var qs = parse_query_string(query);
+        var kdmatkul = jQuery('input[name="kdmatkul"]').val(), 
+            nmmatkul = jQuery('input[name="nmmatkul"]').val(),
+            sks = jQuery('input[name="sks"]').val(),
+            ruangan = jQuery('input[name="ruangan"]').val(),
+            kelas = jQuery('input[name="kelas"]').val(),
+            hari = jQuery('select[name="hari"]').val(),
+            jam = jQuery('input[name="jam"]').val(),
+            semester = jQuery('select[name="semester"]').val(),
+            idDosen = jQuery('select[name="idDosen"]').val();
+        if(kdmatkul != '' && nmmatkul != '' && sks != '' && ruangan != '' && kelas != '' && hari != '' && semester != '' && idDosen != '' && idDosen != ''){
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                url: 'php/update.php',
+                data:{id:qs.id,kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam,semester:semester,idDosen:idDosen},
+                error: function(jqxhr, status, exception) {
+                    console.log(exception);
+                    // var object = JSON.parse(e.responseText);
+                    // alert(object.message);
+                  },
+            }).done(function(data){
+                alert('Data berhasil diupdate')
+                window.location.replace('index.php');
+            });
+        }else{
+            alert('Ada data yang kosong')
         }
      
     });

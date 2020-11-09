@@ -16,19 +16,20 @@
       <div class="card-body">
         <div id="accordion">
           <div class="card">
-            <div class="card-header" id="headingOne">
+            <!-- <div class="card-header" id="headingOne">
               <h5 class="mb-0">
                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   Semester 1
                 </button>
               </h5>
-            </div>
+            </div> -->
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th>No</th>
+                      <th>Semester</th>
                       <th>Kd Matakuliah</th>
                       <th>Nama Matakuliah</th>
                       <th>Sks</th>
@@ -84,7 +85,7 @@
                   <?php
               include("../config/koneksi.php");
               $no=0;
-              $queryJoin = "SELECT matkul.kd_matkul,matkul.nama_matkul,matkul.sks,matkul.kelas,matkul.ruangan,matkul.hari,matkul.jam,dosen.nama,matkul.id_matkul FROM dosen INNER JOIN matkul ON dosen.id_dosen=matkul.id_dosen";
+              $queryJoin = "SELECT matkul.kd_matkul,matkul.nama_matkul,matkul.sks,matkul.kelas,matkul.ruangan,matkul.hari,matkul.jam,matkul.semester,dosen.nama,matkul.id_matkul FROM dosen INNER JOIN matkul ON dosen.id_dosen=matkul.id_dosen ORDER BY semester ASC";
               $result = $koneksi->query($queryJoin);
               while($data = mysqli_fetch_row($result))
               {
@@ -94,10 +95,11 @@
               <tr>
               <?php
                 echo '<td><input type="checkbox" name="" id=""> '.$no.'</td>';
+                echo "<td align=center>$data[7]</td>";
                 echo "<td align=center>$data[0]</td>";
                 echo "<td align=center>$data[1]</td>";
                 echo "<td align=center>$data[2]</td>";
-                echo "<td align=center>$data[7]</td>";
+                echo "<td align=center>$data[8]</td>";
                 echo "<td align=center>$data[3]</td>";
                 echo "<td align=center>$data[4]</td>";
                 echo "<td align=center>$data[5]</td>";
