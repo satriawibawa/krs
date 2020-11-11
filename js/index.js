@@ -198,13 +198,39 @@ $( document ).ready(function() {
                 url: 'php/update.php',
                 data:{id:qs.id,kdmatkul:kdmatkul,nmmatkul:nmmatkul,sks:sks,ruangan:ruangan,kelas:kelas,hari:hari,jam:jam,semester:semester,idDosen:idDosen},
                 error: function(jqxhr, status, exception) {
-                    console.log(exception);
-                    // var object = JSON.parse(e.responseText);
-                    // alert(object.message);
+                    var object = JSON.parse(jqxhr.responseText);
+                    alert(object.message);
                   },
             }).done(function(data){
                 alert('Data berhasil diupdate')
                 window.location.replace('index.php');
+            });
+        }else{
+            alert('Ada data yang kosong')
+        }
+     
+    });
+    $(".updatedosen").click(function(e){
+        
+        e.preventDefault();
+        var query = window.location.search.substring(1);
+        var qs = parse_query_string(query);
+        var nama = jQuery('input[name="nama"]').val(), 
+            email = jQuery('input[name="email"]').val(),
+            alamat = $('textarea#alamat').val();
+        if(nama != '' && email != '' && alamat != ''){
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                url: 'php/update.php',
+                data:{id:qs.id,nama:nama,email:email,alamat:alamat},
+                error: function(jqxhr, status, exception) {
+                    var object = JSON.parse(jqxhr.responseText);
+                    alert(object.message);
+                  },
+            }).done(function(data){
+                alert('Data berhasil diupdate')
+                window.location.replace('read.php');
             });
         }else{
             alert('Ada data yang kosong')

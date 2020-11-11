@@ -60,7 +60,7 @@
                 echo "<td align=center>$data[7]</td>";
                 echo "<td align=center>$data[8]</td>";
                 echo '<td align=center><a href="update.php?id='.$data[9].'" class="btn btn-success">Edit</a> |
-                  <a href="delete.php?id='.$data[8].'" class="btn btn-danger">Delete</a></td>
+                  <a href="delete.php?id='.$data[9].'" class="btn btn-danger">Delete</a></td>
                   '
                   ?>
                 </td>
